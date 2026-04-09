@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chanève — Structural Skincare</title>
+  <meta name="description" content="Chanève dag- en nachtcrème. Helpt bij lijntjes, vlekken en stevigheid. Opbouwend bij dagelijks gebruik.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:      #FDFAF7;
+      --cream2:     #F5EFE6;
+      --cream3:     #EDE4D6;
+      --gold:       #C8A882;
+      --gold-dk:    #A8865A;
+      --gold-lt:    #E8D5BB;
+      --forest:     #3D5C3A;
+      --forest-lt:  #4E7349;
+      --sage:       #A8C8A8;
+      --sage-bg:    #EBF3EB;
+      --text:       #2A2520;
+      --muted:      #7A6E62;
+      --warm-line:  rgba(200,168,130,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream); color: var(--text);
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 22px; line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV DESKTOP ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px;
+      background: rgba(253,250,247,0.96); backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--warm-line);
+    }
+    .nav-brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--text); letter-spacing: 0.04em; }
+    .nav-sub { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold-dk); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--forest); }
+    .nav-cta {
+      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cream); background: var(--forest);
+      padding: 14px 28px; text-decoration: none;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--forest-lt); transform: translateY(-1px); }
+
+    /* ── MOBIEL BOTTOM NAV ── */
+    .mob-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(253,250,247,0.97); backdrop-filter: blur(12px);
+      border-top: 0.5px solid var(--warm-line);
+      padding: 10px 0 14px;
+      justify-content: space-around; align-items: center;
+    }
+    .mob-nav a {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mob-nav a:hover, .mob-nav a.active { color: var(--forest); }
+    .mob-nav-icon { font-size: 20px; line-height: 1; }
+    .mob-nav-cta {
+      background: var(--forest); color: var(--cream) !important;
+      padding: 8px 18px; font-size: 11px !important;
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('chaneve_creme.jpg');
+      background-size: cover; background-position: center;
+      filter: brightness(0.92) saturate(0.7) sepia(0.15);
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(105deg, rgba(253,250,247,0.92) 0%, rgba(253,250,247,0.82) 45%, rgba(253,250,247,0.3) 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      padding: 140px 48px 100px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold-dk); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 0.5px; background: var(--gold); flex-shrink: 0; }
+    .hero-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(80px, 10vw, 130px);
+      font-weight: 300; line-height: 0.95; letter-spacing: 0.02em;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .hero-brand em { font-style: italic; color: var(--forest); }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 3.5vw, 46px);
+      font-weight: 300; line-height: 1.2; letter-spacing: 0.01em;
+      margin-bottom: 24px; color: var(--text);
+    }
+    .hero-body {
+      font-size: 20px; line-height: 1.9; color: var(--muted);
+      max-width: 440px; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; background: var(--forest); color: var(--cream);
+      font-family: 'Jost', sans-serif; font-size: 13px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 18px 40px; text-decoration: none;
+      transition: background 0.25s, transform 0.15s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--forest-lt); transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 0.5px solid var(--gold-lt); padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--forest); border-color: var(--gold); }
+
+    /* HERO POTJE */
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .hero-foto-wrap {
+      position: relative; width: 100%; max-width: 460px;
+      border-radius: 2px; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(42,37,32,0.15);
+    }
+    .hero-foto-wrap img {
+      width: 100%; height: 500px; object-fit: cover; object-position: center 30%;
+      display: block;
+      filter: saturate(0.82) brightness(1.06) sepia(0.06) hue-rotate(5deg);
+      transition: filter 0.4s, transform 0.6s;
+    }
+    .hero-foto-wrap:hover img { filter: saturate(0.9) brightness(1.06) sepia(0.04); transform: scale(1.02); }
+    .hero-foto-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(245,239,230,0.12);
+      mix-blend-mode: multiply; pointer-events: none;
+    }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--cream3);
+      border-top: 0.5px solid var(--warm-line); border-bottom: 0.5px solid var(--warm-line);
+      padding: 18px 48px;
+      display: flex; justify-content: center; gap: 48px; align-items: center; flex-wrap: wrap;
+    }
+    .strip-item { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 14px; }
+    .strip-item::before { content: '·'; color: var(--gold); font-size: 20px; }
+    .strip-item:first-child::before { display: none; }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold-dk); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before { content: ''; display: block; width: 26px; height: 0.5px; background: var(--gold); }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 4.5vw, 64px);
+      font-weight: 300; line-height: 1.08; margin-bottom: 22px; color: var(--text);
+    }
+    h2 em { font-style: italic; color: var(--forest); }
+    .lead { font-size: 24px; color: var(--muted); line-height: 1.9; max-width: 600px; }
+
+    /* ── CREME FULLWIDTH ── */
+    .creme-band {
+      height: 280px; overflow: hidden; position: relative;
+    }
+    .creme-band img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
+      filter: saturate(0.65) brightness(1.04) sepia(0.1);
+    }
+    .creme-band::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(245,239,230,0.15); mix-blend-mode: multiply;
+    }
+
+    /* ── HERKENNING ── */
+    .herkenning { background: var(--cream2); }
+    .herkenning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 52px; }
+    .herkenning-lijst { list-style: none; margin: 20px 0 28px; }
+    .herkenning-lijst li {
+      font-size: 21px; color: var(--muted); padding: 16px 0;
+      border-bottom: 0.5px solid var(--warm-line);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .herkenning-lijst li::before { content: '—'; color: var(--gold); font-size: 15px; flex-shrink: 0; }
+    .herkenning-conclusie {
+      font-family: 'Cormorant Garamond', serif; font-size: 28px;
+      font-style: italic; color: var(--forest); line-height: 1.5;
+    }
+    .herkenning-right p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
+
+    /* ── WAT CHANÈVE DOET ── */
+    .watdoet { background: var(--cream); }
+    .watdoet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 52px; }
+    .watdoet-tekst p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
+    .fronten-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--warm-line); }
+    .front-item { background: var(--cream); padding: 28px 24px; transition: background 0.25s; }
+    .front-item:hover { background: var(--cream2); }
+    .front-nr { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: rgba(61,92,58,0.12); line-height: 1; margin-bottom: 8px; }
+    .front-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .front-body { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* ── STRUCTURAL SKINCARE ── */
+    .structural { background: var(--sage-bg); }
+    .structural .section-label { color: var(--forest); }
+    .structural .section-label::before { background: var(--forest); }
+    .structural-body { max-width: 720px; margin-top: 24px; }
+    .structural-body p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
+
+    /* ── VERHAAL ── */
+    .verhaal { background: var(--cream); }
+    .verhaal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 52px; }
+    .verhaal-tekst p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
+    .verhaal-sign { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--forest); margin-top: 8px; }
+    .verhaal-wetenschap { background: var(--cream2); padding: 36px; border-left: 2px solid var(--gold); margin-bottom: 32px; }
+    .verhaal-wetenschap-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 12px; }
+    .verhaal-wetenschap p { font-size: 18px; color: var(--muted); line-height: 1.85; }
+    .verhaal-ing-blok { margin-top: 0; }
+    .verhaal-ing-blok p { font-size: 18px; color: var(--muted); line-height: 1.85; }
+    .verhaal-ing-blok em { color: var(--forest); font-style: italic; }
+
+    /* ── INGREDIËNTEN ── */
+    .ingredienten { background: var(--cream2); }
+    .ing-intro p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-top: 16px; max-width: 600px; }
+    .ing-table { width: 100%; border-collapse: collapse; margin-top: 44px; }
+    .ing-table tr { border-bottom: 0.5px solid var(--warm-line); }
+    .ing-table tr:last-child { border-bottom: none; }
+    .ing-table td { padding: 26px 16px; vertical-align: top; }
+    .ing-table td:first-child { width: 28%; padding-right: 28px; }
+    .ing-naam { font-weight: 500; color: var(--text); margin-bottom: 4px; font-size: 18px; }
+    .ing-sub { font-size: 14px; color: var(--gold-dk); letter-spacing: 0.06em; font-style: italic; }
+    .ing-werking { font-size: 17px; color: var(--muted); line-height: 1.78; }
+    .inci-blok { background: var(--cream3); padding: 28px 32px; margin-top: 44px; }
+    .inci-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 10px; }
+    .inci-tekst { font-size: 14px; color: var(--muted); line-height: 1.85; }
+
+    /* ── GEBRUIK ── */
+    .gebruik { background: var(--cream); }
+    .gebruik-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--warm-line); margin-top: 52px; }
+    .gebruik-item { background: var(--cream); padding: 40px 32px; }
+    .gebruik-nr { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: rgba(200,168,130,0.3); line-height: 1; margin-bottom: 16px; }
+    .gebruik-title { font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 12px; }
+    .gebruik-body { font-size: 18px; color: var(--muted); line-height: 1.8; }
+    .gebruik-note { font-size: 18px; color: var(--muted); margin-top: 36px; padding-top: 24px; border-top: 0.5px solid var(--warm-line); font-style: italic; max-width: 600px; }
+
+    /* ── VOOR WIE ── */
+    .voorwie { background: var(--cream2); }
+    .voorwie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 52px; }
+    .voorwie-tekst p { font-size: 21px; color: var(--muted); line-height: 1.9; margin-bottom: 18px; }
+    .voorwie-tekst p:last-child { margin-bottom: 0; }
+    .voorwie-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: 30px; font-style: italic;
+      color: var(--forest); line-height: 1.55; padding: 44px;
+      border: 0.5px solid var(--gold-lt); background: var(--cream);
+    }
+
+    /* ── FAQ ── */
+    .faq { background: var(--cream); }
+    .faq-list { margin-top: 52px; border-top: 0.5px solid var(--warm-line); }
+    .faq-item { border-bottom: 0.5px solid var(--warm-line); }
+    .faq-vraag {
+      font-size: 19px; font-weight: 400; color: var(--text);
+      padding: 24px 0; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; user-select: none; transition: color 0.2s;
+    }
+    .faq-vraag:hover { color: var(--forest); }
+    .faq-icon {
+      width: 28px; height: 28px; border: 0.5px solid var(--gold); border-radius: 50%;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--gold-dk); transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-antwoord {
+      font-size: 19px; color: var(--muted); line-height: 1.88;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding-bottom: 0;
+    }
+    .faq-item.open .faq-antwoord { max-height: 600px; padding-bottom: 26px; }
+
+    /* ── RESERVEER ── */
+    .reserveer { background: var(--forest); color: var(--cream); padding: 100px 48px; }
+    .reserveer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .reserveer .section-label { color: var(--sage); }
+    .reserveer .section-label::before { background: var(--sage); }
+    .reserveer h2 { color: var(--cream); }
+    .reserveer h2 em { color: var(--gold-lt); }
+    .reserveer .lead { color: rgba(253,250,247,0.75); max-width: 440px; margin-top: 16px; font-size: 20px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 8px; }
+    .form-field {
+      width: 100%; background: rgba(255,255,255,0.08); border: 0.5px solid rgba(200,168,130,0.4);
+      color: var(--cream); font-family: 'Jost', sans-serif; font-size: 18px; font-weight: 300;
+      padding: 16px 20px; outline: none; transition: border-color 0.2s;
+    }
+    .form-field::placeholder { color: rgba(253,250,247,0.35); }
+    .form-field:focus { border-color: var(--gold); }
+    .form-check { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+    .form-check input { margin-top: 3px; accent-color: var(--gold); flex-shrink: 0; }
+    .form-check label { font-size: 14px; color: rgba(253,250,247,0.6); line-height: 1.6; }
+    .form-check a { color: var(--gold-lt); }
+    .form-submit {
+      width: 100%; background: var(--gold); color: var(--text);
+      font-family: 'Jost', sans-serif; font-size: 13px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 19px; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .form-submit:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .form-note { font-size: 13px; color: rgba(253,250,247,0.45); margin-top: 16px; text-align: center; letter-spacing: 0.04em; }
+    .form-error { display: none; font-size: 15px; color: #e8a0a0; margin-top: 12px; }
+    .form-success { display: none; font-size: 18px; color: var(--cream); line-height: 1.8; padding: 32px 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1E2E1C; color: rgba(253,250,247,0.5);
+      padding: 40px 48px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--cream); letter-spacing: 0.04em; }
+    .footer-copy { font-size: 13px; letter-spacing: 0.04em; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(253,250,247,0.5); text-decoration: none; }
+    .footer-links a:hover { color: var(--gold-lt); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.hidden { opacity: 0; transform: translateY(20px); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.12s; }
+    .reveal-d2 { transition-delay: 0.24s; }
+
+    /* ── ACCORDION ── */
+    .acc-trigger {
+      width: 100%; background: none; border: none;
+      border-bottom: 0.5px solid var(--warm-line);
+      padding: 20px 0; cursor: pointer; text-align: left;
+      font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+      display: none; justify-content: space-between; align-items: center;
+      transition: color 0.2s;
+    }
+    .acc-trigger:hover { color: var(--forest); }
+    .acc-trigger .acc-icon {
+      width: 24px; height: 24px; border: 0.5px solid var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--gold-dk); transition: transform 0.3s; flex-shrink: 0;
+    }
+    .acc-trigger.open .acc-icon { transform: rotate(45deg); }
+    .acc-content { overflow: hidden; transition: max-height 0.45s ease; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 10px 16px; font-size: 11px; }
+      .mob-nav { display: flex; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 100px 20px 80px; }
+      .hero-visual { order: -1; }
+      .hero-foto-wrap img { height: 320px; }
+      .hero-brand { font-size: clamp(60px, 15vw, 88px); }
+      h1 { font-size: clamp(24px, 6vw, 34px); }
+      .hero-body { font-size: 18px; }
+
+      .strip { padding: 14px 20px; gap: 18px; }
+      .strip-item { font-size: 10px; }
+
+      section { padding: 60px 20px; }
+      .reserveer { padding: 64px 20px; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+
+      h2 { font-size: clamp(36px, 8vw, 48px); }
+      .herkenning-lijst li { font-size: 18px; }
+      .herkenning-right p { font-size: 18px; }
+      .watdoet-tekst p { font-size: 18px; }
+      .structural-body p { font-size: 18px; }
+      .verhaal-tekst p { font-size: 18px; }
+      .voorwie-tekst p { font-size: 18px; }
+      .faq-vraag { font-size: 17px; }
+      .faq-antwoord { font-size: 17px; }
+      .ing-werking { font-size: 15px; }
+      .gebruik-body { font-size: 16px; }
+
+      .herkenning-grid { grid-template-columns: 1fr; gap: 0; }
+      .watdoet-grid { grid-template-columns: 1fr; gap: 0; }
+      .fronten-grid { grid-template-columns: 1fr; }
+      .verhaal-grid { grid-template-columns: 1fr; gap: 36px; }
+      .gebruik-grid { grid-template-columns: 1fr; }
+      .voorwie-grid { grid-template-columns: 1fr; gap: 32px; }
+      .reserveer-inner { grid-template-columns: 1fr; gap: 44px; }
+      .ing-table td:first-child { width: 36%; }
+
+      .acc-trigger { display: flex; }
+      .acc-content.mob-collapsed { max-height: 0 !important; }
+    }
+
+    @media (min-width: 769px) {
+      .acc-trigger { display: none !important; }
+      .acc-content { max-height: none !important; overflow: visible !important; }
+      body { padding-bottom: 0; }
+    }
+
+    @media (max-width: 768px) {
+      body { padding-bottom: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV DESKTOP -->
+<nav>
+  <a class="nav-brand" href="#">
+    <span class="nav-logo">Chanève</span>
+    <span class="nav-sub">Structural Skincare</span>
+  </a>
+  <div class="nav-links">
+    <a href="#watdoet">Wat het doet</a>
+    <a href="#verhaal">Verhaal</a>
+    <a href="#ingredienten">Ingrediënten</a>
+    <a href="#gebruik">Gebruik</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta" href="#reserveer">Reserveer jouw pot</a>
+</nav>
+
+<!-- MOBIEL BOTTOM NAV -->
+<nav class="mob-nav">
+  <a href="#watdoet"><span class="mob-nav-icon">✦</span>Wat het doet</a>
+  <a href="#verhaal"><span class="mob-nav-icon">◎</span>Verhaal</a>
+  <a href="#ingredienten"><span class="mob-nav-icon">⬡</span>Ingrediënten</a>
+  <a href="#faq"><span class="mob-nav-icon">?</span>FAQ</a>
+  <a class="mob-nav-cta" href="#reserveer">Reserveer</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow reveal">Plantaardige ingrediënten · Opbouwend · Dag én nacht</div>
+      <div class="hero-brand reveal reveal-d1">Chan<em>è</em>ve</div>
+      <h1 class="reveal reveal-d1">Helpt bij lijntjes, vlekken<br>en stevigheid.</h1>
+      <p class="hero-body reveal reveal-d1">Chanève belooft geen wonderen. Wel een formule die opbouwend werkt — voor een huid die bij dagelijks gebruik zichtbaar rustiger, steviger en egaler aanvoelt, met minder zichtbare lijntjes en een egalere teint.</p>
+      <div class="hero-actions reveal reveal-d2">
+        <a class="btn-primary" href="#reserveer">Reserveer jouw pot</a>
+        <a class="btn-ghost" href="#watdoet">Ontdek de formule</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-d2">
+      <div class="hero-foto-wrap">
+        <img src="chaneve_potje.jpg" alt="Chanève Structural Skincare crème">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">Opbouwend bij dagelijks gebruik</div>
+  <div class="strip-item">Dag én nacht</div>
+  <div class="strip-item">Plantaardige ingrediënten</div>
+  <div class="strip-item">Vrouwen én mannen</div>
+  <div class="strip-item">Geen quick fix</div>
+</div>
+
+<!-- HERKENNING -->
+<section class="herkenning" id="herkenning">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Herken je dit?</div>
+      <h2>Je huid voelt anders<br>dan <em>vroeger.</em></h2>
+    </div>
+    <div class="herkenning-grid">
+      <div>
+        <ul class="herkenning-lijst reveal">
+          <li>Kleine lijntjes die er ineens zijn</li>
+          <li>Een vlek die blijft hangen</li>
+          <li>Minder stevig dan je gewend was</li>
+          <li>Minder egaal, minder rustig</li>
+          <li>Een huid die minder snel herstelt</li>
+        </ul>
+        <p class="herkenning-conclusie reveal">Dat is geen gegeven.</p>
+      </div>
+      <button class="acc-trigger" data-target="herkenning-extra">Wat Chanève hieraan doet <span class="acc-icon">+</span></button>
+      <div class="acc-content mob-collapsed" id="herkenning-extra">
+        <div class="herkenning-right reveal">
+          <p>De huid verandert op meerdere fronten tegelijk. Vochtverlies, collageenafbraak, pigmentatie, barrièrefunctie — het zijn processen die samen bepalen hoe je huid eruitziet en aanvoelt.</p>
+          <p>Chanève richt zich niet op één van die signalen, maar op wat eronder ligt. De formule werkt tegelijkertijd aan meerdere van die processen — opbouwend, bij dagelijks gebruik.</p>
+          <p>Geen snelle correctie. Wel een huid die geleidelijk rustiger, steviger en egaler wordt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREME FULLWIDTH -->
+<div class="creme-band">
+  <img src="chaneve_creme.jpg" alt="Chanève crème textuur">
+</div>
+
+<!-- WAT CHANÈVE DOET -->
+<section class="watdoet" id="watdoet">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Wat Chanève doet</div>
+      <h2>Eén crème. Zes redenen<br><em>waarom het werkt.</em></h2>
+    </div>
+    <div class="watdoet-grid">
+      <div class="watdoet-tekst reveal">
+        <p>De meeste crèmes pakken één probleem aan. Chanève werkt tegelijkertijd aan vochtbalans, stevigheid en een egale teint — en helpt zo zichtbaar bij lijntjes, vlekken en een huid die minder rustig aanvoelt.</p>
+        <p><strong style="font-weight:500;color:var(--text);">Dag en nacht. Opbouwend bij dagelijks gebruik.</strong></p>
+      </div>
+      <div>
+        <button class="acc-trigger" data-target="fronten-detail">De zes fronten <span class="acc-icon">+</span></button>
+        <div class="acc-content mob-collapsed" id="fronten-detail">
+          <div class="fronten-grid reveal">
+            <div class="front-item"><div class="front-nr">01</div><div class="front-title">Vochtbalans</div><div class="front-body">Trekt vocht aan en houdt het vast voor een volle, soepele huid.</div></div>
+            <div class="front-item"><div class="front-nr">02</div><div class="front-title">Stevigheid</div><div class="front-body">Ondersteunt collageensynthese en huidveerkracht.</div></div>
+            <div class="front-item"><div class="front-nr">03</div><div class="front-title">Teint & egalisatie</div><div class="front-body">Helpt pigmentatie en ongelijkmatige teint verminderen.</div></div>
+            <div class="front-item"><div class="front-nr">04</div><div class="front-title">Lijntjes</div><div class="front-body">Werkt aan de zichtbaarheid van fijne lijntjes bij dagelijks gebruik.</div></div>
+            <div class="front-item"><div class="front-nr">05</div><div class="front-title">Barrière</div><div class="front-body">Versterkt de beschermende huidbarrière tegen externe prikkels.</div></div>
+            <div class="front-item"><div class="front-nr">06</div><div class="front-title">Uitstraling</div><div class="front-body">Voedt en beschermt voor een glanzende, gezonde uitstraling.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURAL SKINCARE -->
+<section class="structural" id="structural">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">De aanpak</div>
+      <h2>Structural<br><em>Skincare.</em></h2>
+    </div>
+    <div class="structural-body reveal">
+      <p>Dat noemen we Structural Skincare: huidverzorging die werkt aan de basis, niet aan het oppervlak.</p>
+      <p>Geen snelle correctie, maar een formule die opbouwend werkt aan meerdere fronten tegelijk — voor een huid die bij dagelijks gebruik zichtbaar rustiger, steviger en egaler wordt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VERHAAL -->
+<section class="verhaal" id="verhaal">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Hoe Chanève ontstond</div>
+      <h2>Een toevallige<br><em>ontdekking.</em><br>Één formule.</h2>
+    </div>
+    <div class="verhaal-grid">
+      <div class="verhaal-tekst reveal">
+        <p>Het begon met zijn moeder. Ze was in China geweest om vrienden en familie te bezoeken. Ze bleek ook bij een Chinese beauty kliniek langs te zijn geweest. Toen ze terugkwam, viel hem iets op wat hij niet had verwacht — haar huid. Stralend. Stevig. Nauwelijks rimpels. Anders op een manier die hij moeilijk kon negeren.</p>
+        <p>Hij begon te zoeken. En vond. Wetenschappelijke literatuur over de werkzame verbindingen in de ingrediënten die ze had gebruikt bestond al jaren — in studies, in publicaties, in een lange traditie van Aziatische kruidenkennis. Maar diezelfde ingrediënten waren vrijwel afwezig in moderne cosmetica.</p>
+        <p>Dat was het begin van meer dan vijf jaar zoeken, testen en verfijnen. Met één doel: een crème die je elke dag gebruikt. Eenvoudig. Zonder overbodige toevoegingen die afleiden van wat werkt.</p>
+        <p>Het resultaat is Chanève.</p>
+        <p class="verhaal-sign">— De oprichter van Chanève</p>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="verhaal-wetenschap">
+          <div class="verhaal-wetenschap-label">Wetenschappelijke basis</div>
+          <p>De werkzame verbindingen in de sleutelingrediënten van Chanève zijn in onafhankelijk wetenschappelijk onderzoek bestudeerd op hun werking op de huid. Wij baseren ons op gepubliceerde studies.</p>
+        </div>
+        <div class="verhaal-ing-blok">
+          <div class="section-label" style="margin-bottom:14px;">De sleutelingrediënten</div>
+          <p>Twee van de sleutelingrediënten, <strong style="font-weight:500;color:var(--text);">Astragalus Membranaceus</strong> en <strong style="font-weight:500;color:var(--text);">Sophora Japonica</strong>, komen uit een eeuwenlange Aziatische kruidentraditie en worden al generaties gebruikt vanwege hun effect op huidbalans. Die kennis combineren we met moderne cosmetische wetenschap en zorgvuldig geselecteerde plantaardige ingrediënten.</p>
+          <p style="margin-top:16px;"><em>Geen quick fix. Wel een formule met een echte basis — die opbouwend werkt en elke dag een beetje verder gaat.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIËNTEN -->
+<section class="ingredienten" id="ingredienten">
+  <div class="section-inner">
+    <div class="ing-intro reveal">
+      <div class="section-label">Wat er in zit</div>
+      <h2>Volledige<br><em>transparantie.</em></h2>
+      <p>Dit zijn de belangrijkste ingrediënten van Chanève — wat ze zijn en waarom ze erin zitten.</p>
+    </div>
+    <button class="acc-trigger" data-target="ing-detail">Bekijk alle ingrediënten <span class="acc-icon">+</span></button>
+    <div class="acc-content mob-collapsed" id="ing-detail">
+      <table class="ing-table reveal">
+        <tbody>
+          <tr>
+            <td><div class="ing-naam">Astragalus Membranaceus</div><div class="ing-sub">Eeuwenlange Aziatische kruidentraditie</div></td>
+            <td><div class="ing-werking">Het centrale ingrediënt van Chanève. Onafhankelijk onderzoek toont aan dat de actieve verbindingen vrije radicalen neutraliseren, ontstekingssignalen remmen, collageensynthese bevorderen en hydratatiefactoren in de huid ondersteunen. Raakt meerdere verouderingsprocessen tegelijk.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Sophora Japonica</div><div class="ing-sub">Aziatische plantentraditie</div></td>
+            <td><div class="ing-werking">Rijk aan rutine — een flavonoïde met antioxidante eigenschappen. Onderzoek toont ondersteuning van de huidbarrière en vermindering van hyperpigmentatie aan.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Sodium Hyaluronate</div><div class="ing-sub">Hyaluronzuur</div></td>
+            <td><div class="ing-werking">Trekt vocht aan en houdt het in de huid vast. Voor een volle, soepele huid.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Squalane</div><div class="ing-sub">Plantaardig</div></td>
+            <td><div class="ing-werking">Lichtgewicht olie dat de huid voedt zonder te verstoppen. Versterkt de huidbarrière en sluit vocht in.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Tocopheryl Acetate</div><div class="ing-sub">Vitamine E</div></td>
+            <td><div class="ing-werking">Krachtige antioxidant die de huid beschermt tegen vrije radicalen en oxidatieve schade.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Argania Spinosa</div><div class="ing-sub">Arganolie — Marokko</div></td>
+            <td><div class="ing-werking">Rijk aan vetzuren en antioxidanten. Voedt, beschermt en geeft de huid glans en soepelheid.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Butyrospermum Parkii</div><div class="ing-sub">Sheaboter</div></td>
+            <td><div class="ing-werking">Intensief voedend en kalmerend. Versterkt de huidbarrière en ondersteunt herstel bij droge of gevoelige huid.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Simmondsia Chinensis</div><div class="ing-sub">Jojoba-olie</div></td>
+            <td><div class="ing-werking">Lijkt op het natuurlijke talg van de huid. Hydrateert zonder te verstoppen en helpt de huidbalans te bewaren.</div></td>
+          </tr>
+          <tr>
+            <td><div class="ing-naam">Citrus Bergamia</div><div class="ing-sub">Bergamot — subtiele geur</div></td>
+            <td><div class="ing-werking">Geeft Chanève een subtiele, frisse geur. Bij bekende gevoeligheid voor citrusextracten raden wij aan dit te controleren.</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="inci-blok reveal">
+        <div class="inci-label">Volledige INCI-lijst — volgorde op concentratie</div>
+        <p class="inci-tekst">Aqua, Glycerin, Cetearyl Alcohol, Glyceryl Stearate, PEG-100 Stearate, Caprylic/Capric Triglyceride, Butyrospermum Parkii Butter, Simmondsia Chinensis Seed Oil, Vitis Vinifera Seed Oil, Argania Spinosa Kernel Oil, Squalane, Cera Alba, Polyglyceryl-4 Stearate, Dimethicone, Sodium Hyaluronate, Tocopheryl Acetate, Astragalus Membranaceus Root Extract, Sophora Japonica Flower Extract, Zinc Ricinoleate, Phenoxyethanol, Ethylhexylglycerin, Citrus Bergamia Risso Peel Oil, Citric Acid, Synthetic Fluorphlogopite, Titanium Dioxide, Tin Oxide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEBRUIK -->
+<section class="gebruik" id="gebruik">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Hoe te gebruiken</div>
+      <h2>Eenvoudig.<br><em>Elke dag.</em></h2>
+    </div>
+    <div class="gebruik-grid reveal reveal-d1">
+      <div class="gebruik-item">
+        <div class="gebruik-nr">01</div>
+        <div class="gebruik-title">Reinig</div>
+        <div class="gebruik-body">Begin met een gereinigd gezicht. Eventueel na serum.</div>
+      </div>
+      <div class="gebruik-item">
+        <div class="gebruik-nr">02</div>
+        <div class="gebruik-title">Breng aan</div>
+        <div class="gebruik-body">Neem een kleine hoeveelheid en masseer zacht in op gezicht, hals en décolleté met opwaartse bewegingen.</div>
+      </div>
+      <div class="gebruik-item">
+        <div class="gebruik-nr">03</div>
+        <div class="gebruik-title">Herhaal</div>
+        <div class="gebruik-body">Één of twee keer per dag — wat past bij jouw routine. Bij gevoelige huid: begin met één keer per dag.</div>
+      </div>
+    </div>
+    <p class="gebruik-note reveal">Chanève bevat geen SPF. Wij raden aan overdag een apart zonnebrandmiddel te gebruiken.</p>
+  </div>
+</section>
+
+<!-- VOOR WIE -->
+<section class="voorwie" id="voorwie">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Voor wie</div>
+      <h2>Voor wie <em>begrijpt</em><br>dat goede huid­verzorging<br>een dagelijkse keuze is.</h2>
+    </div>
+    <div class="voorwie-grid">
+      <div class="voorwie-tekst reveal">
+        <p>Voor wie merkt dat haar huid verandert — en daar iets aan wil doen, zonder een ingewikkelde routine.</p>
+        <p>Voor wie geen tien producten wil, maar één crème die klopt.</p>
+        <p>Ook voor mannen die hetzelfde zoeken. Zonder gedoe.</p>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="voorwie-quote">
+          "Geen quick fix. Geen overdreven beloftes. Wel een formule die elke dag een beetje verder werkt."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Veelgestelde vragen</div>
+      <h2>Alles wat je<br><em>wilt weten.</em></h2>
+    </div>
+    <div class="faq-list reveal reveal-d1">
+
+      <div class="faq-item">
+        <div class="faq-vraag">Voor wie is Chanève geschikt? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Voor wie begrijpt dat goede huidverzorging geen quick fix is — maar een dagelijkse keuze. Chanève is geschikt voor alle huidtypes — droog, normaal, gemengd, vet en gevoelig. Voor mannen en vrouwen die hun huid structureel willen ondersteunen, zonder ingewikkelde routine.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Waarom heet het Structural Skincare? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Omdat de formule werkt aan de basis van de huid — niet aan het oppervlak. Structural Skincare is onze naam voor huidverzorging die meerdere onderliggende processen tegelijk ondersteunt, opbouwend bij dagelijks gebruik.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Wat maakt Astragalus Membranaceus en Sophora Japonica bijzonder? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Dit zijn twee ingrediënten met een lange geschiedenis in de Aziatische kruidentraditie, waarvan de werkzame verbindingen inmiddels ook wetenschappelijk zijn onderzocht op hun effect op de huid. Ze vormen de kern van de Chanève-formule.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Hoe snel zie ik resultaat? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Bij dagelijks gebruik is het effect opbouwend. Na ongeveer vier weken beginnen de eerste effecten zichtbaar te worden — een huid die rustiger aanvoelt, egaler oogt en beter in balans lijkt. Na zes weken dagelijks gebruik zijn de resultaten doorgaans het meest uitgesproken. Hoe regelmatiger het gebruik, hoe beter en duurzamer het effect.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Kan ik Chanève ochtends én avonds gebruiken? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Ja. Chanève is een dag- én nachtcrème. Één of twee keer per dag — wat past bij jouw routine.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Kan ik Chanève gebruiken naast andere producten? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Ja. Breng Chanève aan als laatste stap in je routine, na reiniging en eventueel serum.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Bevat Chanève parfum? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Chanève bevat een kleine hoeveelheid bergamotolie voor een subtiele, frisse geur. Bij bekende gevoeligheid voor citrusextracten raden wij aan dit te controleren.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Zijn de ingrediënten wetenschappelijk onderzocht? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Ja. De werkzame verbindingen in de ingrediënten zijn in onafhankelijk wetenschappelijk onderzoek bestudeerd op hun werking op de huid. Wij hebben zelf geen onderzoek gedaan, maar baseren ons op gepubliceerde studies.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Bevat Chanève SPF? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">Nee. Chanève bevat geen SPF. Wij raden aan overdag een apart zonnebrandmiddel te gebruiken.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-vraag">Houdbaarheid na opening? <span class="faq-icon">+</span></div>
+        <div class="faq-antwoord">12 maanden na opening. Uitsluitend voor uitwendig gebruik. Bij contact met de ogen direct spoelen met water. Bij irritatie gebruik staken. Buiten bereik van kinderen houden.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESERVEER -->
+<section class="reserveer" id="reserveer">
+  <div class="reserveer-inner">
+    <div class="reveal">
+      <div class="section-label">Eerste lichting</div>
+      <h2>Reserveer<br><em>jouw pot.</em></h2>
+      <p class="lead">Schrijf je in en ontvang als eerste bericht wanneer Chanève beschikbaar is.</p>
+    </div>
+    <div class="reveal reveal-d1">
+      <form id="reserveerForm" action="ACTION_URL" method="POST">
+        <input type="hidden" name="_subject" value="Nieuwe inschrijving — Chanève reserveerlijst">
+        <input type="hidden" name="_language" value="nl">
+        <div class="form-group">
+          <label class="form-label" for="voornaam">Voornaam</label>
+          <input type="text" class="form-field" id="voornaam" name="voornaam" placeholder="Jouw voornaam" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="emailInput">E-mailadres</label>
+          <input type="email" class="form-field" id="emailInput" name="email" placeholder="naam@voorbeeld.nl" required autocomplete="email">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="privacyCheck" name="privacy" required>
+          <label for="privacyCheck">Ik ga akkoord met de <a href="#">privacyverklaring</a>. Mijn gegevens worden uitsluitend gebruikt om mij op de hoogte te stellen van de lancering van Chanève.</label>
+        </div>
+        <button type="submit" class="form-submit">Schrijf mij in</button>
+        <p class="form-note">Één e-mail op het moment dat de verkoop start. Geen nieuwsbrief. Uitschrijven kan altijd.</p>
+        <div class="form-error" id="formError">Er ging iets mis. Probeer het opnieuw of stuur een e-mail naar <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="335a5d555c73505b525d5645561d5d5f">[email&#160;protected]</a>.</div>
+      </form>
+      <div class="form-success" id="formSuccess"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Chanève</div>
+  <div class="footer-copy">© 2026 Chaneve Cosmetics B.V. &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620b0c040d22010a030c0714074c0c0e">[email&#160;protected]</a> &nbsp;·&nbsp; Huidverzorging vanuit wetenschap. Zonder omwegen.</div>
+  <div class="footer-links"><a href="#">Privacy</a><a href="#">Contact</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* REVEAL */
+document.querySelectorAll('.reveal').forEach(r => r.classList.add('hidden'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.remove('hidden');
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+/* FAQ */
+document.querySelectorAll('.faq-vraag').forEach(v => {
+  v.addEventListener('click', () => {
+    const item = v.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* MOBIEL ACCORDEONS */
+function isMob() { return window.innerWidth <= 768; }
+
+document.querySelectorAll('.acc-trigger').forEach(btn => {
+  const id = btn.getAttribute('data-target');
+  const content = document.getElementById(id);
+  if (!content) return;
+
+  if (isMob()) {
+    content.style.maxHeight = '0px';
+  } else {
+    content.style.maxHeight = 'none';
+    content.style.overflow = 'visible';
+  }
+
+  btn.addEventListener('click', () => {
+    if (!isMob()) return;
+    const open = btn.classList.contains('open');
+    if (open) {
+      btn.classList.remove('open');
+      content.style.maxHeight = '0px';
+    } else {
+      btn.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + 200 + 'px';
+    }
+  });
+});
+
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.acc-content').forEach(c => {
+    if (!isMob()) { c.style.maxHeight = 'none'; c.style.overflow = 'visible'; }
+  });
+  if (!isMob()) document.querySelectorAll('.acc-trigger').forEach(b => b.classList.remove('open'));
+});
+
+/* MOBIEL NAV ACTIVE STATE */
+const sections = document.querySelectorAll('section[id], div.creme-band');
+const mobLinks = document.querySelectorAll('.mob-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  mobLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+/* FORMULIER */
+document.getElementById('reserveerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn = form.querySelector('.form-submit');
+  const errorEl = document.getElementById('formError');
+  const successEl = document.getElementById('formSuccess');
+  const voornaam = form.querySelector('#voornaam').value;
+
+  btn.textContent = 'Bezig...';
+  btn.disabled = true;
+  errorEl.style.display = 'none';
+
+  const action = form.getAttribute('action');
+  if (!action || action === 'ACTION_URL') {
+    form.style.display = 'none';
+    successEl.innerHTML = 'Je staat op de lijst, ' + voornaam + '.<br>We laten het je weten zodra je kunt bestellen.';
+    successEl.style.display = 'block';
+    return;
+  }
+  try {
+    const data = new FormData(form);
+    const response = await fetch(action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+    if (response.ok) {
+      form.style.display = 'none';
+ 
